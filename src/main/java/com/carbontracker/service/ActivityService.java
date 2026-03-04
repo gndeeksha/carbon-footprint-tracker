@@ -1,5 +1,5 @@
 package com.carbontracker.service;
 
-public class CarbonCalculatorService {
+public class ActivityService {
 
 }
