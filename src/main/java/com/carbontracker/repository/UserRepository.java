@@ -1,22 +1,70 @@
-<hibernate-configuration>
-<session-factory>
+package com.carbontracker.repository;
 
-<property name="hibernate.connection.driver_class">
-com.mysql.cj.jdbc.Driver
-</property>
+import java.util.List;
 
-<property name="hibernate.connection.url">
-jdbc:mysql://localhost:3306/carbon_tracker
-</property>
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-<property name="hibernate.connection.username">root</property>
-<property name="hibernate.connection.password">root</property>
+import com.carbontracker.config.HibernateConfig;
+import com.carbontracker.entity.User;
 
-<property name="hibernate.dialect">
-org.hibernate.dialect.MySQL8Dialect
-</property>
+public class UserRepository {
 
-<property name="hibernate.show_sql">true</property>
+    public void saveUser(User user) {
 
-</session-factory>
-</hibernate-configuration>
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+
+            session = HibernateConfig.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+
+            session.persist(user);
+
+            transaction.commit();
+
+            System.out.println("User saved successfully!");
+
+        } catch (Exception e) {
+
+            if (transaction != null) {
+                transaction.rollback();
+            }
+
+            e.printStackTrace();
+
+        } finally {
+
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+
+    // READ OPERATION
+    public List<User> getAllUsers() {
+
+        Session session = null;
+        List<User> users = null;
+
+        try {
+
+            session = HibernateConfig.getSessionFactory().openSession();
+
+            users = session.createQuery("FROM User", User.class).list();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+            if (session != null) {
+                session.close();
+            }
+        }
+
+        return users;
+    }
+
+}

@@ -1,20 +1,29 @@
 package com.carbontracker.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name="carbon_record")
+@Table(name = "carbon_record")
 public class CarbonRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "user_id")
     private int userId;
+
+    @Column(name = "activity_id")
     private int activityId;
+
+    @Column(name = "co2_emission")
     private double co2Emission;
 
-    public CarbonRecord(){}
+    @Column(name = "calculation_date")
+    private LocalDate calculationDate;
+
+    public CarbonRecord() {}
 
     public int getId() {
         return id;
@@ -46,5 +55,13 @@ public class CarbonRecord {
 
     public void setCo2Emission(double co2Emission) {
         this.co2Emission = co2Emission;
+    }
+
+    public LocalDate getCalculationDate() {
+        return calculationDate;
+    }
+
+    public void setCalculationDate(LocalDate calculationDate) {
+        this.calculationDate = calculationDate;
     }
 }

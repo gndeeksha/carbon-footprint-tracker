@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<hibernate-configuration>
+
+<session-factory>
+
+<!-- Database connection -->
+
+<property name="hibernate.connection.driver_class">
+com.mysql.cj.jdbc.Driver
+</property>
+
+<property name="hibernate.connection.url">
+jdbc:mysql://localhost:3306/carbon_tracker
+</property>
+
+<property name="hibernate.connection.username">
+root
+</property>
+
+<property name="hibernate.connection.password">
+Deeksha@5678
+</property>
+
+<!-- Hibernate settings -->
+
+<property name="hibernate.dialect">
+org.hibernate.dialect.MySQLDialect
+</property>
+
+<property name="hibernate.show_sql">
+true
+</property>
+
+<property name="hibernate.hbm2ddl.auto">
+update
+</property>
+
+<!-- Entity mapping -->
+
+<mapping class="com.carbontracker.entity.User"/>
+<mapping class="com.carbontracker.entity.Activity"/>
+<mapping class="com.carbontracker.entity.CarbonRecord"/>
+
+</session-factory>
+
+</hibernate-configuration>

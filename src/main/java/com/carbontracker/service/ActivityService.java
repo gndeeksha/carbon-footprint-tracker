@@ -5,11 +5,14 @@ import com.carbontracker.repository.ActivityRepository;
 
 public class ActivityService {
 
-    ActivityRepository repository = new ActivityRepository();
+    private ActivityRepository activityRepository = new ActivityRepository();
+    private CarbonCalculatorService calculatorService = new CarbonCalculatorService();
 
     public void addActivity(Activity activity) {
 
-        repository.saveActivity(activity);
+        activityRepository.saveActivity(activity);
+
+        calculatorService.calculateEmission(activity);
 
     }
 }

@@ -1,19 +1,25 @@
 package com.carbontracker;
 
-import com.carbontracker.config.HibernateConfig;
+import java.time.LocalDate;
+
+import com.carbontracker.entity.Activity;
+import com.carbontracker.service.ActivityService;
 
 public class CarbonTrackerApplication {
 
     public static void main(String[] args) {
 
-        System.out.println("Carbon Footprint Tracker Started");
+        ActivityService activityService = new ActivityService();
 
-        try {
-            HibernateConfig.getSessionFactory();
-            System.out.println("Hibernate connected successfully");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Activity activity = new Activity();
+
+        activity.setUserId(1);
+        activity.setActivityType("Transport");
+        activity.setDescription("Car travel");
+        activity.setValue(15);
+        activity.setDate(LocalDate.now());
+
+        activityService.addActivity(activity);
 
     }
 }

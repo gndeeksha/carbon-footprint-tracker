@@ -11,9 +11,9 @@ public class HibernateConfig {
 
     private static SessionFactory sessionFactory;
 
-    public static SessionFactory getSessionFactory() {
+    static {
 
-        if(sessionFactory == null) {
+        try {
 
             Configuration configuration = new Configuration();
 
@@ -24,8 +24,20 @@ public class HibernateConfig {
             configuration.addAnnotatedClass(CarbonRecord.class);
 
             sessionFactory = configuration.buildSessionFactory();
+
+            System.out.println("Hibernate SessionFactory Created Successfully");
+
+        } catch (Throwable ex) {
+
+            System.err.println("SessionFactory creation failed.");
+            throw new ExceptionInInitializerError(ex);
+
         }
 
+    }
+
+    public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
 }
