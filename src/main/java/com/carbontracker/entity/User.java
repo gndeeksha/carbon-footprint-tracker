@@ -2,7 +2,7 @@ package com.carbontracker.entity;
 
 import jakarta.persistence.*;
 
-@Entity
+@Entity //represent database tables
 @Table(name = "user")
 public class User {
 
